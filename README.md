@@ -1,2 +1,3 @@
-# coat-corgi-tac-toe
-Capybara's vs. Corgis in this family-friendly game of tic-tac-toe
+# capy-corgi-tic-tac-toe
+
+Capybara's vs. Corgis in this pass-and-play, family-friendly game of tic-tac-toe

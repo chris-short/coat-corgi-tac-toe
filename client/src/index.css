@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Chewy&family=Fredoka:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Capybara Theme (Warm Earth Tones) */
+  --capy-primary: 28 80% 52%;    /* Orange-Brown */
+  --capy-light: 32 90% 95%;      /* Light Cream */
+  --capy-dark: 15 40% 20%;       /* Deep Brown */
+  
+  /* Corgi Theme (Sunny Yellows) */
+  --corgi-primary: 45 90% 60%;   /* Golden Yellow */
+  --corgi-light: 48 90% 96%;     /* Pale Yellow */
+  --corgi-dark: 35 40% 25%;      /* Darker Gold/Brown */
+
+  /* UI Colors */
+  --background: 30 20% 98%;
+  --foreground: 20 10% 15%;
+  --card: 0 0% 100%;
+  --card-foreground: 20 10% 15%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 20 10% 15%;
+  --primary: 28 80% 52%;
+  --primary-foreground: 30 20% 98%;
+  --secondary: 45 90% 60%;
+  --secondary-foreground: 35 40% 25%;
+  --muted: 30 10% 94%;
+  --muted-foreground: 25 10% 45%;
+  --accent: 45 90% 60%;
+  --accent-foreground: 35 40% 25%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 30 10% 90%;
+  --input: 30 10% 90%;
+  --ring: 28 80% 52%;
+  --radius: 1rem;
+}
+
+@layer base {
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Fredoka', sans-serif;
+    background-image: 
+      radial-gradient(circle at 10% 20%, rgba(255, 150, 50, 0.05) 0%, transparent 20%),
+      radial-gradient(circle at 90% 80%, rgba(255, 200, 50, 0.05) 0%, transparent 20%);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Chewy', cursive;
+  }
+}
+
+.game-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  width: 100%;
+  max-width: 400px;
+  aspect-ratio: 1/1;
+}
+
+.tile {
+  @apply bg-white rounded-2xl shadow-sm border-4 border-transparent transition-all duration-300 flex items-center justify-center text-4xl cursor-pointer relative overflow-hidden;
+}
+
+.tile:hover:not(:disabled) {
+  @apply -translate-y-1 shadow-md border-primary/20;
+}
+
+.tile.winner {
+  @apply border-green-400 bg-green-50 animate-pulse;
+}
+
+.tile-capy {
+  @apply text-[--capy-primary];
+}
+
+.tile-corgi {
+  @apply text-[--corgi-primary];
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-muted-foreground/20 rounded-full;
+}
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-muted-foreground/40;
+}
