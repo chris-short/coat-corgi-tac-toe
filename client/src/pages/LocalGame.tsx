@@ -87,24 +87,39 @@ export default function LocalGame() {
     setWinningIndices(null);
   };
 
+  const statusMessage = winner
+    ? winner === "DRAW"
+      ? "It's a tie!"
+      : `${winner === "X" ? "Capybara" : "Corgi"} wins!`
+    : `${turn === "X" ? "Capybara" : "Corgi"}'s turn`;
+
   return (
     <div className="min-h-screen flex flex-col items-center bg-slate-50 p-4">
+      {/* Screen-reader live region for turn/game announcements */}
+      <div aria-live="polite" aria-atomic="true" className="sr-only">
+        {statusMessage}
+      </div>
+
       {/* Header */}
       <div className="w-full max-w-lg flex justify-center items-center mb-8 pt-4">
         <Logo />
       </div>
 
       {/* Players */}
-      <div className="flex justify-between w-full max-w-md mb-8 gap-4">
-        <PlayerCard 
-          type="X" 
-          isActive={turn === "X" && !winner} 
+      <div
+        className="flex justify-between w-full max-w-md mb-8 gap-4"
+        role="status"
+        aria-label={statusMessage}
+      >
+        <PlayerCard
+          type="X"
+          isActive={turn === "X" && !winner}
           isWinner={winner === "X"}
           name="Player 1"
         />
-        <PlayerCard 
-          type="O" 
-          isActive={turn === "O" && !winner} 
+        <PlayerCard
+          type="O"
+          isActive={turn === "O" && !winner}
           isWinner={winner === "O"}
           name="Player 2"
         />

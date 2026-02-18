@@ -62,11 +62,15 @@
 }
 
 .tile {
-  @apply bg-white rounded-2xl shadow-sm border-4 border-transparent transition-all duration-300 flex items-center justify-center text-4xl cursor-pointer relative overflow-hidden;
+  @apply bg-white rounded-2xl shadow-md border-4 border-slate-200 transition-all duration-300 flex items-center justify-center text-4xl cursor-pointer relative overflow-hidden;
 }
 
 .tile:hover:not(:disabled) {
-  @apply -translate-y-1 shadow-md border-primary/20;
+  @apply -translate-y-1 shadow-lg border-primary/60 bg-orange-50/40;
+}
+
+.tile:focus-visible {
+  @apply outline-none ring-4 ring-primary ring-offset-2;
 }
 
 .tile.winner {

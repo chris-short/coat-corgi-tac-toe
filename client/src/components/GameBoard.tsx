@@ -9,34 +9,37 @@ interface GameBoardProps {
   winningIndices?: number[] | null;
 }
 
+const CELL_NAMES = [
+  "Top left", "Top center", "Top right",
+  "Middle left", "Middle center", "Middle right",
+  "Bottom left", "Bottom center", "Bottom right",
+];
+
 export function GameBoard({ board, onTileClick, disabled, winningIndices }: GameBoardProps) {
-  // Animation variants for container
   const container = {
     hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1
-      }
-    }
+    show: { opacity: 1, transition: { staggerChildren: 0.1 } }
   };
 
-  // Animation for items
   const item = {
     hidden: { y: 20, opacity: 0 },
     show: { y: 0, opacity: 1 }
   };
 
   return (
-    <motion.div 
+    <motion.div
       variants={container}
       initial="hidden"
       animate="show"
       className="game-grid mx-auto"
+      role="grid"
+      aria-label="Tic-tac-toe board"
     >
       {board.map((cell, i) => {
         const isWinningTile = winningIndices?.includes(i);
-        
+        const cellContent = cell === "X" ? "Capybara" : cell === "O" ? "Corgi" : "empty";
+        const isWinner = winningIndices !== null && winningIndices !== undefined;
+
         return (
           <motion.button
             key={i}
@@ -45,11 +48,12 @@ export function GameBoard({ board, onTileClick, disabled, winningIndices }: Game
             onClick={() => onTileClick(i)}
             whileHover={{ scale: cell === null && !disabled ? 0.95 : 1 }}
             whileTap={{ scale: 0.9 }}
+            aria-label={`${CELL_NAMES[i]}, ${cellContent}${isWinningTile ? ", winning square" : ""}`}
+            aria-pressed={cell !== null}
             className={cn(
               "tile aspect-square",
               isWinningTile && "ring-4 ring-green-400 bg-green-100/50 scale-105 z-10",
-              !cell && !disabled && "hover:bg-gray-50",
-              disabled && "cursor-default opacity-90"
+              disabled && !isWinner && "cursor-default opacity-90"
             )}
           >
             {cell === "X" && <GamePiece type="X" />}
