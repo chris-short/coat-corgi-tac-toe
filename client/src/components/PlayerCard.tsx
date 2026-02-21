@@ -16,6 +16,7 @@ export function PlayerCard({ type, isActive, isWinner, name, className }: Player
 
   return (
     <div
+      aria-current={isActive ? "true" : undefined}
       className={cn(
         "relative p-4 rounded-2xl border-2 transition-all duration-300 w-32 md:w-40 flex flex-col items-center gap-3 bg-white shadow-sm",
         isActive && isCapy && "border-[--capy-primary] ring-2 ring-[--capy-primary]/20 shadow-lg scale-105",
@@ -29,7 +30,7 @@ export function PlayerCard({ type, isActive, isWinner, name, className }: Player
         <GamePiece type={type} />
         
         {isActive && (
-          <span className="absolute -top-2 -right-2 flex h-4 w-4">
+          <span className="absolute -top-2 -right-2 flex h-4 w-4" aria-hidden="true">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
             <span className="relative inline-flex rounded-full h-4 w-4 bg-green-500"></span>
           </span>

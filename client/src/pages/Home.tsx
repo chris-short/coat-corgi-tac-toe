@@ -18,18 +18,18 @@ export default function Home() {
         >
           <Logo />
           
-          <div className="flex justify-center gap-8 py-4">
-            <motion.div 
+          <div className="flex justify-center gap-8 py-4" aria-hidden="true">
+            <motion.div
               animate={{ rotate: [0, 10, -10, 0] }}
               transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
               className="w-24 h-24"
             >
               <GamePiece type="X" />
             </motion.div>
-            
+
             <div className="text-4xl font-chewy flex items-center text-muted-foreground">VS</div>
-            
-            <motion.div 
+
+            <motion.div
               animate={{ rotate: [0, -10, 10, 0] }}
               transition={{ repeat: Infinity, duration: 4, ease: "easeInOut", delay: 0.5 }}
               className="w-24 h-24"
@@ -45,28 +45,30 @@ export default function Home() {
           transition={{ duration: 0.5, delay: 0.2 }}
         >
           <Card className="p-6 md:p-8 shadow-xl border-2 border-orange-100 bg-white/90 backdrop-blur-sm rounded-3xl space-y-4">
-            <Link href="/local" className="block">
-              <Button 
-                className="w-full h-16 text-xl font-chewy bg-gradient-to-r from-orange-400 to-orange-500 hover:from-orange-500 hover:to-orange-600 shadow-lg shadow-orange-200 hover:shadow-xl hover:-translate-y-1 transition-all rounded-2xl"
-              >
-                <Smartphone className="mr-2 h-6 w-6" />
-                Pass & Play (Offline)
-              </Button>
-            </Link>
+            <Button
+              asChild
+              className="w-full h-16 text-xl font-chewy bg-gradient-to-r from-orange-400 to-orange-500 hover:from-orange-500 hover:to-orange-600 shadow-lg shadow-orange-200 hover:shadow-xl hover:-translate-y-1 transition-all rounded-2xl"
+            >
+              <Link href="/local">
+                <Smartphone className="mr-2 h-6 w-6" aria-hidden="true" />
+                Pass &amp; Play (Offline)
+              </Link>
+            </Button>
 
-            <Link href="/lobby" className="block">
-              <Button 
-                variant="outline"
-                className="w-full h-16 text-xl font-chewy border-2 border-yellow-400 text-yellow-600 hover:bg-yellow-50 hover:border-yellow-500 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all rounded-2xl"
-              >
-                <Users className="mr-2 h-6 w-6" />
+            <Button
+              asChild
+              variant="outline"
+              className="w-full h-16 text-xl font-chewy border-2 border-yellow-400 text-yellow-600 hover:bg-yellow-50 hover:border-yellow-500 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all rounded-2xl"
+            >
+              <Link href="/lobby">
+                <Users className="mr-2 h-6 w-6" aria-hidden="true" />
                 Play Online
-              </Button>
-            </Link>
+              </Link>
+            </Button>
 
             <div className="pt-4 text-center">
               <p className="text-xs text-muted-foreground font-medium">
-                <Trophy className="w-3 h-3 inline mr-1" />
+                <Trophy className="w-3 h-3 inline mr-1" aria-hidden="true" />
                 No login required • Instant play
               </p>
             </div>
@@ -76,7 +78,7 @@ export default function Home() {
 
       {/* Decorative footer */}
       <div className="fixed bottom-4 text-center text-xs text-muted-foreground opacity-50">
-        Created with ❤️ for kids & parents
+        Created with <span aria-hidden="true">❤️</span><span className="sr-only">love</span> for kids &amp; parents
       </div>
     </div>
   );

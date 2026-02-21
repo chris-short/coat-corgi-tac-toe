@@ -52,12 +52,14 @@ export default function LocalGame() {
       setWinner(result.winner as any);
       if (result.winner !== "DRAW") {
         setWinningIndices(result.indices);
-        confetti({
-          particleCount: 100,
-          spread: 70,
-          origin: { y: 0.6 },
-          colors: result.winner === "X" ? ['#f97316', '#ea580c'] : ['#eab308', '#ca8a04']
-        });
+        if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          confetti({
+            particleCount: 100,
+            spread: 70,
+            origin: { y: 0.6 },
+            colors: result.winner === "X" ? ['#f97316', '#ea580c'] : ['#eab308', '#ca8a04']
+          });
+        }
       }
     }
   };
@@ -101,15 +103,14 @@ export default function LocalGame() {
       </div>
 
       {/* Header */}
-      <div className="w-full max-w-lg flex justify-center items-center mb-8 pt-4">
+      <header className="w-full max-w-lg flex justify-center items-center mb-8 pt-4">
         <Logo />
-      </div>
+      </header>
 
+      <main className="flex flex-col items-center w-full">
       {/* Players */}
       <div
         className="flex justify-between w-full max-w-md mb-8 gap-4"
-        role="status"
-        aria-label={statusMessage}
       >
         <PlayerCard
           type="X"
@@ -145,12 +146,12 @@ export default function LocalGame() {
           <h2 className="text-4xl font-chewy text-slate-800">
             {winner === "DRAW" ? "It's a Tie!" : `${winner === "X" ? "Capybara" : "Corgi"} Wins!`}
           </h2>
-          <Button 
+          <Button
             onClick={resetGame}
             size="lg"
             className="rounded-full text-lg font-bold px-8 shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all"
           >
-            <RotateCcw className="mr-2 h-5 w-5" />
+            <RotateCcw className="mr-2 h-5 w-5" aria-hidden="true" />
             Play Again
           </Button>
         </motion.div>
@@ -175,6 +176,7 @@ export default function LocalGame() {
           </Button>
         </div>
       )}
+      </main>
     </div>
   );
 }

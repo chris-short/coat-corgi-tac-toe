@@ -32,7 +32,7 @@ export function GameBoard({ board, onTileClick, disabled, winningIndices }: Game
       initial="hidden"
       animate="show"
       className="game-grid mx-auto"
-      role="grid"
+      role="group"
       aria-label="Tic-tac-toe board"
     >
       {board.map((cell, i) => {
@@ -49,7 +49,6 @@ export function GameBoard({ board, onTileClick, disabled, winningIndices }: Game
             whileHover={{ scale: cell === null && !disabled ? 0.95 : 1 }}
             whileTap={{ scale: 0.9 }}
             aria-label={`${CELL_NAMES[i]}, ${cellContent}${isWinningTile ? ", winning square" : ""}`}
-            aria-pressed={cell !== null}
             className={cn(
               "tile aspect-square",
               isWinningTile && "ring-4 ring-green-400 bg-green-100/50 scale-105 z-10",
